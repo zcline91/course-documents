@@ -1,30 +1,29 @@
-\documentclass[12pt, letterpaper]{../hwassignment}
+\documentclass[12pt, letterpaper]{../homework}
 
 \usepackage{import}
 
-\newcommand{\bookproblem}[2]{
-  \item Exercise #1.#2 \import{../../book-problems/#1/#2}{comment}
-}
-\newcommand{\extrahwproblem}[2]{
-  \item \import{../../extra-hw-problems/#1/#2}{statement}
-}
+\newcommand{\bookproblem}[4]{\item Exercise #1.#2.#3 \import{#4}{comment}}
+\newcommand{\extrahwproblem}[1]{\item \import{#1}{statement}}
 
-% SET BASED ON YOUR COURSE
+
 \title{Assignment 1}
-\coursenumber{Math216}
-\coursename{Statistics I}
-\semester{Spring 2022}
+\coursenumber{MathXXX}
+\coursename{COURSE NAME}
+\semester{Fall 20XX}
 \instructor{Prof. Cline}
 
 \begin{document}
   \maketitle
 
   \begin{enumerate}
-    \bookproblem{1.1}{2}
-    \bookproblem{1.1}{4}
-    \bookproblem{1.2}{16}
-    \bookproblem{1.2}{24}
-    \extrahwproblem{1.1}{poll}
-    \extrahwproblem{1.1}{potato}
+    
+    \bookproblem{1}{1}{2}{../../book-problems/1/1/2}
+    \bookproblem{1}{1}{4}{../../book-problems/1/1/4}
+    \bookproblem{1}{2}{16}{../../book-problems/1/2/16}
+    \bookproblem{1}{2}{24}{../../book-problems/1/2/24}
+    \bookproblem{2}{1}{14}{../../book-problems/2/1/14}
+    \bookproblem{2}{1}{16}{../../book-problems/2/1/16}
+    \extrahwproblem{../../extra-hw-problems/silly/poll}
+    \extrahwproblem{../../extra-hw-problems/silly/potato}
   \end{enumerate}
 \end{document}
