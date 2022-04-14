@@ -13,7 +13,7 @@ For that reason, any pdf files in folders named `img` (or subdirectories thereof
 
 ## To-Do
 
-- [ ] Implement the creation of homework solution files
+- [x] Implement the creation of homework solution files
 - [ ] Implement the creation of worksheets and notes for class
     - [ ] Create a class for worksheets
     - [ ] Create a class for notes
