@@ -1,0 +1,30 @@
+\documentclass[12pt, letterpaper]{../hwassignment}
+
+\usepackage{import}
+
+\newcommand{\bookproblem}[2]{
+  \item Exercise #1.#2 \import{../../book-problems/#1/#2}{comment}
+}
+\newcommand{\extrahwproblem}[2]{
+  \item \import{../../extra-hw-problems/#1/#2}{statement}
+}
+
+% SET BASED ON YOUR COURSE
+\title{Assignment 1}
+\coursenumber{Math216}
+\coursename{Statistics I}
+\semester{Spring 2022}
+\instructor{Prof. Cline}
+
+\begin{document}
+  \maketitle
+
+  \begin{enumerate}
+    \bookproblem{1.1}{2}
+    \bookproblem{1.1}{4}
+    \bookproblem{1.2}{16}
+    \bookproblem{1.2}{24}
+    \extrahwproblem{1.1}{poll}
+    \extrahwproblem{1.1}{potato}
+  \end{enumerate}
+\end{document}

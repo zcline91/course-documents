@@ -1,0 +1,11 @@
+{
+    "Assignment 1": {
+        "book-problems":{
+            "1.1": [2, 4],
+            "1.2": [16, 24]
+        },
+        "extra-hw-problems": {
+            "1.1": ["poll", "potato"]
+        }
+    }
+}

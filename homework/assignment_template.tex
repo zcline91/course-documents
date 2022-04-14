@@ -1,0 +1,24 @@
+\documentclass[12pt, letterpaper]{../homework}
+
+\usepackage{import}
+
+\newcommand{\bookproblem}[2]{
+  \item Exercise #1.#2 \import{../../book-problems/#1/#2}{comment}
+}
+\newcommand{\extrahwproblem}[2]{
+  \item \import{../../extra-hw-problems/#1/#2}{statement}
+}
+
+\title{[[TITLE]]}
+\coursenumber{[[COURSENUMBER]]}
+\coursename{[[COURSENAME]]}
+\semester{[[SEMESTER]]}
+\instructor{[[INSTRUCTOR]]}
+
+\begin{document}
+  \maketitle
+
+  \begin{enumerate}
+    [[PROBLEMS]]
+  \end{enumerate}
+\end{document}
