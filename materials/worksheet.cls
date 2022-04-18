@@ -5,7 +5,7 @@
 
 \RequirePackage{fancyhdr}
 \RequirePackage{calc}
-% \RequirePackage{xcolor}
+\RequirePackage{xcolor}
 % \DeclareOption{blue}{\renewcommand{\rulecolor}{blue}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 \ProcessOptions\relax
@@ -47,4 +47,4 @@
 \lhead{\@coursenumber{} -- \@coursename{}}
 \cfoot{\thepage}
 
-\newenvironment{solution}[1]{\newline \noindent \begin{minipage}[c][#1][c]{\columnwidth}}{\end{minipage}}
+\newenvironment{solution}[1]{\newline \noindent \begin{minipage}[t][#1][t]{\linewidth} \vspace{0.25ex} \textbf{Solution:} \\[0.5ex]  \color{blue}}{\end{minipage}}
