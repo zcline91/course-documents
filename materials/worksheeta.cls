@@ -5,13 +5,14 @@
 %--------------Initial Code--------------
 \RequirePackage{xcolor}
 \RequirePackage{ifthen}
-\newboolean{boxed}
+\newboolean{boxed@solutions}
+\newcommand{\solution@color}
 
 %---------Declaration of Options---------
 \DeclareOption{blue-solutions}{\AtEndOfClass{\SolutionEmphasis{\color{blue}}}}
 \DeclareOption{red-solutions}{\AtEndOfClass{\SolutionEmphasis{\color{red}}}}
-\DeclareOption{boxed-solutions}{\setboolean{boxed}{true}}
-\DeclareOption{no-boxed-solutions}{\setboolean{boxed}{false}}
+\DeclareOption{boxed-solutions}{\setboolean{boxed@solutions}{true}}
+\DeclareOption{no-boxed-solutions}{\setboolean{boxed@solutions}{false}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{exam}}
 
 %----------Execution of Options----------
@@ -51,9 +52,12 @@
 % \runningfooter{}{\thepage}{}
 \footer{}{Page \thepage{} of \numpages}{}
 
+% Make title and set footer for first page
+\AtBeginDocument{\maketitle \thispagestyle{headandfoot}}
+
 % Style solutions
 \renewcommand{\solutiontitle}{\noindent\textbf{Solution:}\par\noindent}
-\ifthenelse{\boolean{boxed}}{}{\colorsolutionboxes \definecolor{SolutionBoxColor}{HTML}{FFFFFF}}
+\ifthenelse{\boolean{boxed@solutions}}{}{\colorsolutionboxes \definecolor{SolutionBoxColor}{HTML}{FFFFFF}}
 
 % Custom Title
 \def\@maketitle{%
@@ -68,4 +72,4 @@
       \@semester{} -- \@instructor{}%
     }%
   \end{center}%
-  \par   \vskip 1.5em}
+  \par   \vskip 1em}
