@@ -1,0 +1,21 @@
+% This file should be included in all documents. Set packages
+% such as fonts that should be more or less consistent throughout 
+% the course, and define custom commands for specific math 
+% conventions so they are consistent throughout, e.g. the notation
+% for a vector should be consistent throughout all of a Calc III
+% course's documents, so you might include
+% \newcommand{\vect}[1]{\vec{#1}}
+% If you decide in a future semester on a different notation, then
+% changing this one command will update all documents for the whole
+% course.
+\usepackage{mathtools}
+\usepackage{etoolbox}
+\usepackage{pgffor}
+\usepackage{xcolor}
+
+\usepackage{mlmodern}
+\usepackage[T1]{fontenc}
+
+\usepackage{zmacros}
+
+\newcommand{\defint}[4]{\int_{#2}^{#3}{#4} \, d#1}
