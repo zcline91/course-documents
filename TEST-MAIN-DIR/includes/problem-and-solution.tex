@@ -1,11 +1,11 @@
 % Commands for writing problems and solutions to different types
-% of quiz problems. There should be a command for every problem
-% source.
+% of problems, e.g. for quizzes, tests, and worksheets. There should
+% be a command for every problem source.
 \usepackage{import}
 
 % Optional argument: space to leave for solution
 % Required argument: path of problem
-\newcommand{\quizproblem}[2][]{%
+\newcommand{\problem}[2][]{%
   \question%
   \subimport{#2}{statement}%
   \ifblank{#1}{%
@@ -16,10 +16,10 @@
   }%
 }
 
-% Same command as \quizproblem, but using a part instead
+% Same command as \problem, but using a part instead
 % Optional argument: space to leave for solution
 % Required argument: path of problem
-\newcommand{\quizpart}[2][]{
+\newcommand{\subproblem}[2][]{
   \part%
   \subimport{#2}{statement}%
   \ifblank{#1}{%
@@ -33,10 +33,13 @@
 \newcommand{\beslproblem}[4][]{%
   \quizproblem[#1]{../../../problems/bes12b/#2/#3/#4}
 }
-\newcommand{\beslpart}[5][]{%
+\newcommand{\beslsubproblem}[5][]{%
   \quizpart[#1]{../../../problems/bes12b/#2/#3/#4/#5}
 }
 
 \newcommand{\assessmentproblem}[2][]{%
   \quizproblem[#1]{../../../problems/assessment/#2}
+}
+\newcommand{\assessmentsubproblem}[3][]{%
+  \quizpart[#1]{../../../problems/assessment/#2/#3}
 }

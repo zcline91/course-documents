@@ -1,0 +1,22 @@
+% Commands for writing statements of different types of homework
+% problems. There should be a command for every problem source.
+\usepackage{import}
+
+% This command takes 1 optional argument, and 3 required. The optional
+% argument specifies the parts of the problem to include as a comma-
+% separated list (e.g. a,b,c). An empty argument means there are no parts.
+% The next three specify the chapter, section, and problem number, in 
+% order.
+\newcommand{\beslproblem}[4][]{%
+  \item[#2.#3.#4]%
+    \subimport{../../../../problems/bes12b/#2/#3/#4/}{statement}%
+    \ifblank{#1}{%
+    }{%
+      \begin{itemize}%
+        \foreach \x in {#1} {%
+          \item[(\x)] \subimport{../../../../problems/bes12b/#2/#3/#4/\x/}%
+                                {statement}%
+        }%
+      \end{itemize}%
+    }%
+}
