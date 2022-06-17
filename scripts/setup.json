@@ -1,0 +1,46 @@
+{
+    "course_number": "(COURSE NUMBER)",
+    "course_name": "(COURSE NAME)",
+    "semester": "(SEMESTER)",
+    "instructor": "(INSTRUCTOR)",
+    "problem_sources": { // Add sources for various problems, e.g. textbooks, colleagues, etc.
+        "(TEXTBOOKNAME)": { // Use only alphabetical characters (maybe use roman numerals for edition)
+            "standard_tex_files": ["solution"], // Tex files to be created by default for each problem
+            "directory_levels": 3 // e.g. chapter/section/problem; change if more or less
+        },
+        "assessment": { // Problems you create for quizzes and tests
+            "standard_tex_files": ["statement", "solution"],
+            "directory_levels": 2 // e.g. topic/problem_number
+        }
+    },
+    "document_types": { // Add/remove to specify the sorts of documents that will be needed for the course
+        "homework-assignment": {
+            "default_directory": "homework/@title@/assignment/@title@.tex",
+            "includes": ["global", "course-info", "homework-assignment"]
+        },
+        "homework-solutions": {
+            "default_directory": "homework/@title@/solutions/@title@-solutions.tex",
+            "includes": ["global", "course-info", "homework-solutions"]
+        },
+        "quiz": {
+            "default_directory": "quizzes/@title@/@title@.tex",
+            "includes": ["global", "course-info", "problem-and-solution"]
+        },
+        "lecture-notes": {
+            "default_directory": "materials/@title@/lecture-notes/@title@-notes.tex",
+            "includes": ["global", "course-info"]
+        },
+        "worksheet": {
+            "default_directory": "materials/@title@/worksheet/@title@-worksheet.tex",
+            "includes": ["global", "course-info", "problem-and-solution"]
+        },
+        "tests": {
+            "default_directory": "tests/@title@/@title@.tex",
+            "includes": ["global", "course-info", "problem-and-solution", "test"]
+        },
+        "clicker-questions": {
+            "default_directory": "clicker-questions/@title@/@title@.tex",
+            "includes": ["clicker-questions", "global", "course-info"] // "clicker-questions" must be included before "course-info"
+        }
+    }
+}
