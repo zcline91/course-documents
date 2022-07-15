@@ -3,17 +3,27 @@
     "course_name": "(COURSE NAME)",
     "semester": "(SEMESTER)",
     "instructor": "(INSTRUCTOR)",
-    "problem_sources": { // Add sources for various problems, e.g. textbooks, colleagues, etc.
-        "(TEXTBOOKNAME)": { // Use only alphabetical characters (maybe use roman numerals for edition)
-            "standard_tex_files": ["solution"], // Tex files to be created by default for each problem
-            "directory_levels": 3 // e.g. chapter/section/problem; change if more or less
+    // Problem sources could include textbooks, colleagues, etc.
+    // Use only alphabetical characters for names (maybe use roman numerals 
+    // for edition numbers of textbooks). 
+    // * `standard_tex_files` is an array of files to be created when a 
+    //   problem is created. E.g. solution, statement, comment.
+    // * `directory_levels` indicates for this problem source how deep the 
+    //   directory structure will go for problems. E.g. if textbook 
+    //   problems will be organized by chapter/section/problem_number, then 
+    //   set directory_levels to 3.
+    "problem_sources": { 
+        "(TEXTBOOKNAME)": { 
+            "standard_tex_files": ["solution"],
+            "directory_levels": 3 
         },
-        "assessment": { // Problems you create for quizzes and tests
+        "assessment": {
             "standard_tex_files": ["statement", "solution"],
-            "directory_levels": 2 // e.g. topic/problem_number
+            "directory_levels": 2 
         }
     },
-    "document_types": { // Add/remove to specify the sorts of documents that will be needed for the course
+    // Add/remove to specify the sorts of documents that will be needed for the course
+    "document_types": { 
         "homework-assignment": {
             "default_directory": "homework/@title@/assignment/@title@.tex",
             "includes": ["global", "course-info", "homework-assignment"]
