@@ -1,10 +1,10 @@
 {
-    "course_name": "Calculus III",
-    "course_number": "Math211",
-    "instructor": "Prof. Cline", 
-    "semester": "Fall 2022",
+    "course_name": "(COURSE NAME)",
+    "course_number": "(COURSE NUMBER)",
+    "instructor": "(INSTRUCTOR)", 
+    "semester": "(SEMESTER)",
     "problem_sources": { 
-        "rogawski": { 
+        "(TEXTBOOKNAME)": { 
             "standard_tex_files": ["solution"],
             "directory_levels": 3 
         },
