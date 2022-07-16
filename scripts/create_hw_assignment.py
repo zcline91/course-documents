@@ -1,66 +1,62 @@
-import os
 import sys
 import json
+import re
+
+from pathlib import Path
+from venv import create
+from util import compress_directories, create_directories
+
+
+class AssignmentNameError(Exception):
+    pass
+
+
+__location__ = Path.cwd().joinpath(Path(__file__).parent).resolve()
+__root__ = __location__.parent # Set parent directory as root
+config = json.loads((__location__ / 'config.json').read_text(encoding='utf-8'))
+hw_assignments = json.loads((__location__ / 'hw_assignments.json').read_text(encoding='utf-8'))
+
+hw_as_config = config['document_types']['homework-assignment']
 
 assignment_name = sys.argv[1]
-if len(sys.argv) > 2:
-    assignment_path = sys.argv[2]
-
-with open('setup.json', 'r', encoding='utf-8') as file:
-    setup = json.load(file)
-with open('hw_assignments.json', 'r', encoding='utf-8') as file:
-    hw_assignments = json.load(file)
+filename = re.sub("[^0-9a-zA-z]+", "-", assignment_name).lower()
+# if len(sys.argv > 2):
+#     pathstr = sys.argv[2]
+# else:
+#     pathstr = (config['document_types']['homework-assignment']['default_path']
+#         .replace('@title@', filename))
+#     print(f"The file will be created at {pathstr}. To change the path, specify a second argument.")
+pathstr = hw_as_config['default_path'].replace('@title@', filename)
+docdepth = len(pathstr.split('/'))
 
 try:
     problem_dict = hw_assignments[assignment_name]
 except KeyError:
-    print(f"{assignment_name} is not a valid assignment name. Aborting")
+    raise AssignmentNameError(f"{assignment_name} is not a known assignment name")
 
-problem_string = ""
-for source in problem_dict:
-    
+prob_str = ""
+for source, probs in problem_dict:
+    s_config = config['problem_sources'][source]
+    comp_dirs = compress_directories(probs)
+    create_directories(comp_dirs, parent_dir=(__root__ / "problems" / source))
+    top_dirs = {Path().joinpath(*d.parts[0:s_config['directory_levels']]) for d in dir}
+    file_dirs = list(set(comp_dirs).union(top_dirs))
+    for dir in file_dirs:
+        for filename in s_config['standard_tex_files']:
+            (__root__ / "problems" / source / dir / f"{filename}.tex").touch()
+    for dir in top_dirs:
+        parts_str = ','.join(
+            d.parts[s_config['directory_levels']] for d in comp_dirs if d.parts[0:s_config['directory_levels']] == dir.parts
+        )
+        if parts_str != '':
+            parts_str = "[" + parts_str + "]"
+        prob_str += (
+            f"  \{source}problem" + parts_str + ''.join(f"{{{d}}}\n" for d in dir.parts)
+        )
 
 
-
-
-    try:
-        problem_dict = course_info["homework"]["assignments"][hw_assignment_name]
-    except KeyError:
-        print(f"{hw_assignment_name} is not a valid assignment name.")
-    command_string, problem_string = "", ""
-    for source, problems in problem_dict.items():
-        # Add a command to the tex preamble for this problem type
-        command = course_info["homework"]["sources"][source]["latex-commands"]["assignment"]
-        macro = command["macro"]
-        dirnames = re.findall("N[0-9]", macro)
-        num_args = len(dirnames) + 1 #PATH will also be an arg
-        for index, string in enumerate(dirnames):
-            macro = macro.replace(string, f"#{index + 1}")
-        macro = macro.replace("PATH", f"#{num_args}")
-        command_string += (f"\\newcommand{{\\{command['name']}}}[{num_args}]"
-                f"{{\\item {macro}}}\n")
-        # Add problems to the list
-        for problem_path in compress_directories(problems):
-            path_components = problem_path.split(os.sep)
-            arguments = [path_components[int(name[1:])-1] for name in dirnames]
-            arguments.append(f"../../{source}/" + "/".join(path_components))
-            problem_string += ('\n    ' + f"\\{command['name']}"
-                    + ''.join(f"{{{arg}}}" for arg in arguments))
-    template_path = os.path.join("homework", "assignment_template.tex")
-    with open(template_path, "r", encoding="utf-8") as file:
-        template = file.read()
-    contents = (template.replace("[[TITLE]]", hw_assignment_name)
-        .replace("[[COMMANDS]]", command_string)
-        .replace("[[PROBLEMS]]", problem_string)
-        .replace("[[COURSENUMBER]]", course_info["course_number"])
-        .replace("[[COURSENAME]]", course_info["course_name"])
-        .replace("[[SEMESTER]]", course_info["semester"])
-        .replace("[[INSTRUCTOR]]", course_info["instructor"]))
-    assignment_path = os.path.join("homework", hw_assignment_name)
-    if not os.path.exists(assignment_path):
-        os.makedirs(assignment_path)
-    with open(
-        os.path.join(assignment_path, 'assignment.tex'),
-        'w', encoding="utf-8"
-    ) as file:
-        file.write(contents)
+contents = (__root__ / 'templates' / 'homework-assignment.tex').read_text(encoding='utf-8')
+(contents.replace("TITLE", assignment_name)
+    .replace("INCLUDES", '\n'.join(["\input{" + "../" * docdepth + f"includes/{x}.tex" for x in hw_as_config['includes']]))
+    .replace("PROBLEMS", prob_str))
+(__root__ / "documents" / pathstr).write_text(contents, encoding='utf-8')

@@ -1,0 +1,46 @@
+{
+    "course_name": "(COURSE NAME)",
+    "course_number": "(COURSE NUMBER)",
+    "instructor": "(INSTRUCTOR)", 
+    "semester": "(SEMESTER)",
+    "problem_sources": { 
+        "(TEXTBOOKNAME)": { 
+            "standard_tex_files": ["solution"],
+            "directory_levels": 3 
+        },
+        "assessment": {
+            "standard_tex_files": ["statement", "solution"],
+            "directory_levels": 2 
+        }
+    },
+    "document_types": { 
+        "homework-assignment": {
+            "default_path": "homework/@title@/assignment/@title@.tex",
+            "includes": ["global", "course-info", "homework-assignment"]
+        },
+        "homework-solutions": {
+            "default_path": "homework/@title@/solutions/@title@-solutions.tex",
+            "includes": ["global", "course-info", "homework-solutions"]
+        },
+        "quiz": {
+            "default_path": "quizzes/@title@/@title@.tex",
+            "includes": ["global", "course-info", "problem-and-solution"]
+        },
+        "lecture-notes": {
+            "default_path": "materials/@title@/lecture-notes/@title@-notes.tex",
+            "includes": ["global", "course-info"]
+        },
+        "worksheet": {
+            "default_path": "materials/@title@/worksheet/@title@-worksheet.tex",
+            "includes": ["global", "course-info", "problem-and-solution"]
+        },
+        "tests": {
+            "default_path": "tests/@title@/@title@.tex",
+            "includes": ["global", "course-info", "problem-and-solution", "test"]
+        },
+        "clicker-questions": {
+            "default_path": "clicker-questions/@title@/@title@.tex",
+            "includes": ["clicker-questions", "global", "course-info"]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+
+\newcommand{\SOURCEproblem}[PROBDEPTH][]{%
+  \item[MIDSTRING]%
+    \subimport{DOCDEPTHSTRINGproblems/SOURCEENDSTRING/}{solution}%
+    \ifblank{#1}{%
+    }{%
+      \begin{itemize}%
+        \foreach \x in {#1} {%
+          \item[(\x)] \subimport{DOCDEPTHSTRINGproblems/SOURCEENDSTRING/\x/}%
+                                {solution}%
+        }%
+      \end{itemize}%
+    }%
+}

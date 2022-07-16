@@ -49,7 +49,7 @@ def create_directories(nested_dict, root="."):
 
 
 
-with open('course_info.json', 'r', encoding='utf-8') as file:
+with open('config.json', 'r', encoding='utf-8') as file:
     course_info = json.load(file)
 
 
@@ -159,4 +159,4 @@ def create_solutions(hw_assignment_name):
     ) as file:
         file.write(contents)
 
-create_solutions("Assignment 1")
+# create_solutions("Assignment 1")

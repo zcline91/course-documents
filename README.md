@@ -24,3 +24,16 @@ For that reason, any pdf files in folders named `img` (or subdirectories thereof
 - [ ] Add coursewide .sty file (and potentially others for homework, worksheets, etc.)
 - [ ] Continue to alter the format of `course_info.json` to store all the necessary info for the course.
 - [ ] Make more functions in `config.py` and then make it a command-line program which will set up the whole course if run with no arguments, and will use arguments from the command-line to perform particular tasks after the course has been initialized.
+
+## Set-Up
+
+- Copy the directory somewhere, probably with the name of the course.
+- Edit `config.json` for the course:
+  - Set the course information at the top of the json file.
+  - Edit/add problem sources. Problem sources could include textbooks, colleagues, etc. Use only alphabetical characters for names (maybe use roman numerals  for edition numbers of textbooks).  
+    - `standard_tex_files` is an array of files to be created when a problem is created. E.g. solution, statement, comment. 
+    - `directory_levels` indicates for this problem source how deep the    directory structure will go for problems. E.g. if textbook problems will be organized by chapter/section/problem_number, then set directory_levels to 3.
+  - Edit/add document types for the course 
+    - `default_directory` is the place a new document of that type will be placed, unless otherwise specified.
+    - `includes` are the files from the directory of includes that will be imported at the top of tex files of the given document type.
+    - Note: For includes for clicker-questions, the include `clicker-questions` must be included before `course-info`.

@@ -1,0 +1,8 @@
+
+\newcommand{\SOURCEproblem}[PROBDEPTH][]{
+  \problem[#1]{DOCDEPTHSTRINGproblems/SOURCEENDSTRING}
+}
+
+\newcommand{\SOURCEsubproblem}[PROBDEPTH][]{
+  \subproblem[#1]{DOCDEPTHSTRINGproblems/SOURCEEND2STRING}
+}

@@ -1,6 +1,5 @@
 % Commands for writing problems and solutions to different types
-% of problems, e.g. for quizzes, tests, and worksheets. There should
-% be a command for every problem source.
+% of problems, e.g. for quizzes, tests, and worksheets.
 \usepackage{import}
 
 % Optional argument: space to leave for solution
@@ -30,16 +29,4 @@
   }%
 }
 
-\newcommand{\beslproblem}[4][]{%
-  \quizproblem[#1]{../../../problems/bes12b/#2/#3/#4}
-}
-\newcommand{\beslsubproblem}[5][]{%
-  \quizpart[#1]{../../../problems/bes12b/#2/#3/#4/#5}
-}
-
-\newcommand{\assessmentproblem}[2][]{%
-  \quizproblem[#1]{../../../problems/assessment/#2}
-}
-\newcommand{\assessmentsubproblem}[3][]{%
-  \quizpart[#1]{../../../problems/assessment/#2/#3}
-}
+% Commands for different problem sources
