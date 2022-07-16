@@ -1,5 +1,5 @@
 
-\newcommand{\SOURCEproblem}[PROBDEPTH][]{%
+\newcommand{\SOURCEsolution}[PROBDEPTH][]{%
   \item[MIDSTRING]%
     \subimport{DOCDEPTHSTRINGproblems/SOURCEENDSTRING/}{solution}%
     \ifblank{#1}{%

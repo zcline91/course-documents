@@ -15,17 +15,11 @@ __root__ = __location__.parent # Set parent directory as root
 config = json.loads((__location__ / 'config.json').read_text(encoding='utf-8'))
 hw_assignments = json.loads((__location__ / 'hw_assignments.json').read_text(encoding='utf-8'))
 
-hw_as_config = config['document_types']['homework-assignment']
+hw_sol_config = config['document_types']['homework-solutions']
 
 assignment_name = sys.argv[1]
 filename = re.sub("[^0-9a-zA-z]+", "-", assignment_name).lower()
-# if len(sys.argv > 2):
-#     pathstr = sys.argv[2]
-# else:
-#     pathstr = (config['document_types']['homework-assignment']['default_path']
-#         .replace('@title@', filename))
-#     print(f"The file will be created at {pathstr}. To change the path, specify a second argument.")
-pathstr = hw_as_config['default_path'].replace('@title@', filename)
+pathstr = hw_sol_config['default_path'].replace('@title@', filename)
 docdepth = len(pathstr.split('/'))
 
 try:
@@ -33,7 +27,7 @@ try:
 except KeyError:
     raise AssignmentNameError(f"{assignment_name} is not a known assignment name")
 
-prob_str = ""
+sol_str = ""
 for source, probs in problem_dict.items():
     s_config = config['problem_sources'][source]
     depth = s_config['directory_levels']
@@ -48,21 +42,21 @@ for source, probs in problem_dict.items():
             path = (__root__ / "problems" / source / dir / f"{filename}.tex")
             if not path.exists():
                 path.write_text("(FILL)")
-    for dir in sorted(top_dirs):
+    for dir in top_dirs:
         parts_str = ','.join(
             (d.parts[depth] for d in comp_dirs if (d.parts[0:depth] == dir.parts and len(d.parts) > depth))
         )
         if parts_str != '':
             parts_str = "[" + parts_str + "]"
-        prob_str += (
-            f"  \{source}problem" + parts_str + ''.join(f"{{{d}}}" for d in dir.parts) + '\n'
+        sol_str += (
+            f"  \{source}solution" + parts_str + ''.join(f"{{{d}}}" for d in dir.parts) + '\n'
         )
 
 
-contents = (__root__ / 'templates' / 'homework-assignment.tex').read_text(encoding='utf-8')
-contents = (contents.replace("TITLE", assignment_name)
-    .replace("INCLUDES", '\n'.join(["\input{" + "../" * docdepth + f"includes/{x}.tex}}" for x in hw_as_config['includes']]))
-    .replace("PROBLEMS", prob_str))
+contents = (__root__ / 'templates' / 'homework-solutions.tex').read_text(encoding='utf-8')
+contents = (contents.replace("TITLE", assignment_name + " Solutions")
+    .replace("INCLUDES", '\n'.join(["\input{" + "../" * docdepth + f"includes/{x}.tex}}" for x in hw_sol_config['includes']]))
+    .replace("SOLUTIONS", sol_str))
 path = (__root__ / "documents" / pathstr)
 path.parent.mkdir(parents=True)
 path.write_text(contents, encoding='utf-8')
