@@ -35,28 +35,31 @@ except KeyError:
     raise AssignmentNameError(f"{assignment_name} is not a known assignment name")
 
 prob_str = ""
-for source, probs in problem_dict:
+for source, probs in problem_dict.items():
     s_config = config['problem_sources'][source]
+    depth = s_config['directory_levels']
     comp_dirs = compress_directories(probs)
     create_directories(comp_dirs, parent_dir=(__root__ / "problems" / source))
-    top_dirs = {Path().joinpath(*d.parts[0:s_config['directory_levels']]) for d in dir}
+    top_dirs = {Path().joinpath(*d.parts[0:depth]) for d in comp_dirs}
     file_dirs = list(set(comp_dirs).union(top_dirs))
     for dir in file_dirs:
         for filename in s_config['standard_tex_files']:
             (__root__ / "problems" / source / dir / f"{filename}.tex").touch()
-    for dir in top_dirs:
+    for dir in sorted(top_dirs):
         parts_str = ','.join(
-            d.parts[s_config['directory_levels']] for d in comp_dirs if d.parts[0:s_config['directory_levels']] == dir.parts
+            (d.parts[depth] for d in comp_dirs if (d.parts[0:depth] == dir.parts and len(d.parts) > depth))
         )
         if parts_str != '':
             parts_str = "[" + parts_str + "]"
         prob_str += (
-            f"  \{source}problem" + parts_str + ''.join(f"{{{d}}}\n" for d in dir.parts)
+            f"  \{source}problem" + parts_str + ''.join(f"{{{d}}}" for d in dir.parts) + '\n'
         )
 
 
 contents = (__root__ / 'templates' / 'homework-assignment.tex').read_text(encoding='utf-8')
-(contents.replace("TITLE", assignment_name)
-    .replace("INCLUDES", '\n'.join(["\input{" + "../" * docdepth + f"includes/{x}.tex" for x in hw_as_config['includes']]))
+contents = (contents.replace("TITLE", assignment_name)
+    .replace("INCLUDES", '\n'.join(["\input{" + "../" * docdepth + f"includes/{x}.tex}}" for x in hw_as_config['includes']]))
     .replace("PROBLEMS", prob_str))
-(__root__ / "documents" / pathstr).write_text(contents, encoding='utf-8')
+path = (__root__ / "documents" / pathstr)
+path.parent.mkdir(parents=True)
+path.write_text(contents, encoding='utf-8')
