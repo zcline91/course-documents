@@ -4,7 +4,7 @@
     "instructor": "(INSTRUCTOR)", 
     "semester": "(SEMESTER)",
     "problem_sources": { 
-        "(TEXTBOOKNAME)": { 
+        "(TEXTBOOK)": { 
             "standard_tex_files": ["solution"],
             "directory_levels": 3 
         },
@@ -34,7 +34,7 @@
             "default_path": "materials/@title@/worksheet/@title@-worksheet.tex",
             "includes": ["global", "course-info", "problem-and-solution"]
         },
-        "tests": {
+        "test": {
             "default_path": "tests/@title@/@title@.tex",
             "includes": ["global", "course-info", "problem-and-solution", "test"]
         },

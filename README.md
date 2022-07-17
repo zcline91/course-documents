@@ -15,15 +15,18 @@ For that reason, any pdf files in folders named `img` (or subdirectories thereof
 
 - [x] Implement the creation of homework solution files
 - [ ] Implement the creation of worksheets and notes for class
-    - [ ] Create a class for worksheets
-    - [ ] Create a class for notes
-- [ ] Implement the creation of quizzes
-    - [ ] Create a class for quizzes
+    - [x] Create a class for worksheets
+    - [x] Create a class for notes
+- [x] Implement the creation of quizzes
+    - [x] Create a class for quizzes
 - [ ] Implement the creation of tests
+    - [ ] Currently 'problem-and-solution' includes only don't allow for the assignment of points. Fix this for tests.
 - [ ] Brainstorm how to store assessment problems in a way which makes them reusable.
-- [ ] Add coursewide .sty file (and potentially others for homework, worksheets, etc.)
+- [x] Add coursewide .sty file (and potentially others for homework, worksheets, etc.) (Used the idea of 'includes' instead to accomplish the same goal.)
 - [ ] Continue to alter the format of `course_info.json` to store all the necessary info for the course.
-- [ ] Make more functions in `config.py` and then make it a command-line program which will set up the whole course if run with no arguments, and will use arguments from the command-line to perform particular tasks after the course has been initialized.
+- [ ] (Make more functions in `config.py` and then make it a command-line program which will set up the whole course if run with no arguments, and will use arguments from the command-line to perform particular tasks after the course has been initialized.) Note: I've abandoned `config.py` for `setup.py`, but have kept it arround for now in case some of the options are useful.
+- [ ] Currently, scripts like `create_quiz.py` and `create_test.py` are mostly the same with a few exceptions. Create one such script, that can be used for both. Doing so might require the creation of more includes, and possibly more options to be added to `config.json`. 
+- [ ] Make subfolders in includes for different depths, so that instead of multiple `problem-and-solution-x` includes with different valuse of x, there are folders `2`, `3`, `4`, etc. each with a file `problem-and-solution.tex`.
 
 ## Set-Up
 

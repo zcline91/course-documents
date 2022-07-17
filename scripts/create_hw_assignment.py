@@ -19,12 +19,6 @@ hw_as_config = config['document_types']['homework-assignment']
 
 assignment_name = sys.argv[1]
 filename = re.sub("[^0-9a-zA-z]+", "-", assignment_name).lower()
-# if len(sys.argv > 2):
-#     pathstr = sys.argv[2]
-# else:
-#     pathstr = (config['document_types']['homework-assignment']['default_path']
-#         .replace('@title@', filename))
-#     print(f"The file will be created at {pathstr}. To change the path, specify a second argument.")
 pathstr = hw_as_config['default_path'].replace('@title@', filename)
 docdepth = len(pathstr.split('/'))
 
