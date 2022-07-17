@@ -37,6 +37,7 @@ for docdepth in range(2, 7):
         end2string = "/#".join(['', *map(str, range(2, probdepth+2))])
         contents += (pas_commands.replace("SOURCE", source)
             .replace("PROBDEPTH", str(probdepth))
+            .replace("PROB2DEPTH", str(probdepth + 1))
             .replace("DOCDEPTHSTRING", "../" * docdepth)
             .replace("ENDSTRING", endstring).replace("END2STRING", end2string))
     (__root__ / 'includes' / f'problem-and-solution-{docdepth}.tex').write_text(contents, encoding='utf-8')

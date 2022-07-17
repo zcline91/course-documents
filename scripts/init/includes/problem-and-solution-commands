@@ -3,6 +3,6 @@
   \problem[#1]{DOCDEPTHSTRINGproblems/SOURCEENDSTRING}
 }
 
-\newcommand{\SOURCEsubproblem}[PROBDEPTH][]{
+\newcommand{\SOURCEsubproblem}[PROB2DEPTH][]{
   \subproblem[#1]{DOCDEPTHSTRINGproblems/SOURCEEND2STRING}
 }
