@@ -1,0 +1,62 @@
+\usepackage{import}
+\usepackage{etoolbox}
+
+% In the document that uses these commands, `\rootdir' must be defined before
+% this file is called, and point to the root directory (the one containing 
+% documents, problems, includes, scripts, etc.). This will usually be set to 
+% something like ../../..
+
+
+% generic command to import the contents of problems/#1/#2.tex, where #1 can 
+% be a nested subdirectory
+\newcommand{\pimport}[2]{\subimport{\rootdir/problems/#1}{#2}}
+
+\newcommand{\pquest}[1]{\pimport{#1}{statement}}
+
+% modified \question command
+\newcommand{\pquestion}[2][]{%
+  \ifblank{#1}{\question}{\question[#1]}%
+  \pimport{#2}{statement}%
+}
+
+% modified \question command with a solutionbox
+\newcommand{\pquestionsol}[3][]{%
+  \pquestion[#1]{#2}%
+  \begin{solutionbox}{#3}%
+    \pimport{#2}{solution}%
+  \end{solutionbox}%
+}
+
+% modified \part command
+\newcommand{\ppart}[2][]{
+  \ifblank{#1}{\part}{\part[#1]}
+  \pimport{#2}{statement}
+}
+
+% modified \part command with a solutionbox
+\newcommand{\ppartsol}[3][]{
+  \ppart[#1]{#2}
+  \begin{solutionbox}{#3}
+    \pimport{#2}{solution}
+  \end{solutionbox}
+}
+
+% modified \subpart command
+\newcommand{\psubpart}[2][]{
+  \ifblank{#1}{\subpart}{\subpart[#1]}
+  \pimport{#2}{statement}
+}
+
+% modified \subpart command with a solutionbox
+\newcommand{\psubpartsol}[3][]{
+  \psubpart[#1]{#2}
+  \begin{solutionbox}{#3}
+    \pimport{#2}{solution}
+  \end{solutionbox}
+}
+
+% modified \item command
+\newcommand{\pitem}[3][]{
+  \ifblank{#1}{\item}{\item[#1]}
+  \pimport{#2}{#3}
+}

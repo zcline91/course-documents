@@ -1,0 +1,13 @@
+\usepackage{etoolbox}
+
+\newcommand{\textbookprob}[3][]{
+  \pitem[#2.#3]{textbook/#2/#3}{statement}
+  \ifblank{#1}{
+  }{
+    \begin{itemize}
+      \foreach \x in {#1} {
+        \pitem[(\x)]{textbook/#2/#3/\x/}{statement}
+      }
+    \end{itemize}
+  }
+}
