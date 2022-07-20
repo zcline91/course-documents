@@ -35,7 +35,7 @@ if __name__ == '__main__':
         help="relative directory within documents to write the file; default set in config file")
     parser.add_argument('-f', '--filename',
         help="default filename is set in config.json")
-    parser.add_argument('-s', '--replace-string', action='append', nargs=2, 
+    parser.add_argument('-s', '--replace_string', action='append', nargs=2, 
         metavar=('OLD_STRING', 'NEW_STRING'),
         help="extra strings that need to be specified for the default "\
             "directory/filename (i.e. those contained within @ symbols)")
@@ -44,10 +44,12 @@ if __name__ == '__main__':
 
     # Parse arguments for command
     doc_conf = config['document_types'][args.doctype]
-    directory = doc_conf["default_directory"] if args.d is None else args.d
-    filename = doc_conf["default_filename"] if args.f is None else args.f
-    if args.s is not None:
-        for x, y in args.s:
+    directory = doc_conf["default_directory"] \
+        if args.directory is None else args.directory
+    filename = doc_conf["default_filename"] \
+        if args.filename is None else args.filename
+    if args.replace_string is not None:
+        for x, y in args.replace_string:
             filename = filename.replace(f"@{x}@", safestr(y))
             directory = directory.replace(f"@{x}@", safestr(y))
     filename = filename.replace("@title@", safestr(args.title))
