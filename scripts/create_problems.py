@@ -36,9 +36,9 @@ if __name__ == '__main__':
     group.add_argument('-f', '--file', help="json file of problems in directory structure")
     args = parser.parse_args()
 
-    if args.s is not None:
-        create_probs(args.source, json.loads(args.s))
-    if args.f is not None:
+    if args.string is not None:
+        create_probs(args.source, json.loads(args.string))
+    if args.file is not None:
         create_probs(args.source, 
             json.loads(Path(args.f).read_text(encoding='utf-8'))
         )
