@@ -11,8 +11,6 @@
 % be a nested subdirectory
 \newcommand{\pimport}[2]{\subimport{\rootdir/problems/#1}{#2}}
 
-\newcommand{\pquest}[1]{\pimport{#1}{statement}}
-
 % modified \question command
 \newcommand{\pquestion}[2][]{%
   \ifblank{#1}{\question}{\question[#1]}%
@@ -28,35 +26,35 @@
 }
 
 % modified \part command
-\newcommand{\ppart}[2][]{
-  \ifblank{#1}{\part}{\part[#1]}
-  \pimport{#2}{statement}
+\newcommand{\ppart}[2][]{%
+  \ifblank{#1}{\part}{\part[#1]}%
+  \pimport{#2}{statement}%
 }
 
 % modified \part command with a solutionbox
-\newcommand{\ppartsol}[3][]{
-  \ppart[#1]{#2}
-  \begin{solutionbox}{#3}
-    \pimport{#2}{solution}
-  \end{solutionbox}
+\newcommand{\ppartsol}[3][]{%
+  \ppart[#1]{#2}%
+  \begin{solutionbox}{#3}%
+    \pimport{#2}{solution}%
+  \end{solutionbox}%
 }
 
 % modified \subpart command
-\newcommand{\psubpart}[2][]{
-  \ifblank{#1}{\subpart}{\subpart[#1]}
-  \pimport{#2}{statement}
+\newcommand{\psubpart}[2][]{%
+  \ifblank{#1}{\subpart}{\subpart[#1]}%
+  \pimport{#2}{statement}%
 }
 
 % modified \subpart command with a solutionbox
-\newcommand{\psubpartsol}[3][]{
-  \psubpart[#1]{#2}
-  \begin{solutionbox}{#3}
-    \pimport{#2}{solution}
-  \end{solutionbox}
+\newcommand{\psubpartsol}[3][]{%
+  \psubpart[#1]{#2}%
+  \begin{solutionbox}{#3}%
+    \pimport{#2}{solution}%
+  \end{solutionbox}%
 }
 
 % modified \item command
-\newcommand{\pitem}[3][]{
-  \ifblank{#1}{\item}{\item[#1]}
-  \pimport{#2}{#3}
+\newcommand{\pitem}[3][]{%
+  \ifblank{#1}{\item}{\item[#1]}%
+  \pimport{#2}{#3}%
 }

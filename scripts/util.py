@@ -19,9 +19,9 @@ def compress_directories(item, parent_dir=Path()):
             if any([isinstance(d, t) for t in (str, list, dict, Path)]):
                 paths.extend(compress_directories(d, new_parent))
             else:
-                raise TypeError('Only lists, dicts, and strs can be passed to compress_directories')
+                raise TypeError('Only lists, dicts, strs, and Paths can be passed to compress_directories')
     else:
-        raise TypeError('Only lists, dicts, and strs can be passed to compress_directories')
+        raise TypeError('Only lists, dicts, strs, and Paths can be passed to compress_directories')
     return paths
 
 def create_directories(item, parent_dir=Path()):
@@ -31,3 +31,17 @@ def create_directories(item, parent_dir=Path()):
             Path.mkdir(dir, parents=True)
         except FileExistsError as e:
             print(f"{e} already exists and will not be replaced")
+
+def descend_directory(d, parent_dir=Path()):
+    """Generator that yields directories descended from a nested dictionary"""
+    if isinstance(d, dict):
+        for x, y in d.items():
+            yield (parent_dir / x)
+            yield from descend_directory(y, parent_dir=(parent_dir / x))
+    elif isinstance(d, list):
+        for x in d:
+            yield from descend_directory(x, parent_dir=parent_dir)
+    elif any(isinstance(d, t) for t in (str, Path)):
+        yield (parent_dir / d)
+    else:
+        raise TypeError('Only lists, dicts, strs, and Paths can be passed to descend_directory')
