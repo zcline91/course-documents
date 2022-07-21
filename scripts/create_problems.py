@@ -40,5 +40,5 @@ if __name__ == '__main__':
         create_probs(args.source, json.loads(args.string))
     if args.file is not None:
         create_probs(args.source, 
-            json.loads(Path(args.f).read_text(encoding='utf-8'))
+            json.loads(Path(args.file).read_text(encoding='utf-8'))
         )
