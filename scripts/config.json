@@ -15,7 +15,10 @@
         "quiz": {
             "default_directory": "quizzes/@title@",
             "default_filename": "@title@.tex",
-            "includes": ["global", "course-info", "probimport"]
+            "includes": ["global", "course-info", "probimport"],
+            "extra-versions": {
+                "solutions": {"options": "answers", "class": "quiz"}
+            }
         },
         "lecture-notes": {
             "default_directory": "materials/@section@",
@@ -25,12 +28,18 @@
         "worksheet": {
             "default_directory": "materials/@section@",
             "default_filename": "@section@-worksheet.tex",
-            "includes": ["global", "course-info", "probimport"]
+            "includes": ["global", "course-info", "probimport"],
+            "extra-versions": {
+                "solutions": {"options": "answers", "class": "worksheet"}
+            }
         },
         "test": {
             "default_directory": "tests/@title@",
             "default_filename": "@title@.tex",
-            "includes": ["global", "course-info", "probimport"]
+            "includes": ["global", "course-info", "probimport"],
+            "extra-versions": {
+                "solutions": {"options": "answers", "class": "test"}
+            }
         },
         "clicker-questions": {
             "default_directory": "clicker-questions/@title@",

@@ -113,3 +113,13 @@ if __name__ == '__main__':
         (path / filename).write_text(contents, encoding="utf-8")
     else: 
         raise FileExistsError(f"{(path / filename)} exists and will not be overwritten. If intended, delete this file first.")
+
+    # Make extra-versions
+    if "extra-versions" in doc_conf:
+        for name, config in doc_conf["extra-versions"].items():
+            extra_filename = f"{Path(filename).stem}-{name}{Path(filename).suffix}"
+            contents = f"\PassOptionsToClass{{{config['options']}}}{{{config['class']}}}\n\input{{{filename}}}"
+            if not (path / extra_filename).exists():
+                (path / extra_filename).write_text(contents, encoding="utf-8")
+            else:
+                raise FileExistsError(f"{(path / extra_filename)} exists and will not be overwritten. If intended, delete this file first.")
