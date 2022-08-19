@@ -32,10 +32,15 @@
             "default_filename": "@title@.tex",
             "includes": ["global", "course-info", "probimport"]
         },
+        "slides": {
+            "default_directory": "materials/@section@",
+            "default_filename": "@section@-slides.tex",
+            "includes": ["slides", "global", "course-info"]
+        },
         "clicker-questions": {
             "default_directory": "clicker-questions/@title@",
             "default_filename": "@title@.tex",
-            "includes": ["clicker-questions", "global", "course-info"]
+            "includes": ["slides", "global", "course-info"]
         }
     }
 }
