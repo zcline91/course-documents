@@ -45,3 +45,13 @@ def descend_directory(d, parent_dir=Path()):
         yield (parent_dir / d)
     else:
         raise TypeError('Only lists, dicts, strs, and Paths can be passed to descend_directory')
+
+def path_to_dict(path):
+    """Generate a nested dict/list/str of folder/file names showing the 
+    directory structre of path."""
+    if any((x.is_file() for x in path.iterdir())):
+        dir_files = [x.name for x in path.iterdir() if x.is_file()]
+        dir_files.extend(({x.name: path_to_dict(x)} for x in path.iterdir() if x.is_dir()))
+        return dir_files
+    else:
+        return {x.name: path_to_dict(x) for x in path.iterdir()}
