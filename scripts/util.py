@@ -55,3 +55,12 @@ def path_to_dict(path):
         return dir_files
     else:
         return {x.name: path_to_dict(x) for x in path.iterdir()}
+
+def latex_escape(inp_str):
+    ret_str = inp_str.replace('\\', '\\textbackslash')
+    for chr in ('&', '%', '$', '#', '_', '{', '}'):
+        ret_str = ret_str.replace(chr, f"\{chr}")
+    return (ret_str
+        .replace('~', '\\textasciitilde')
+        .replace('^', '\\textasciicircum')
+        )

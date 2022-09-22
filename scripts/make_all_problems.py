@@ -5,7 +5,7 @@ import argparse
 
 from pathlib import Path
 
-from util import path_to_dict, descend_directory
+from util import path_to_dict, descend_directory, latex_escape
 
 
 class ProblemLevelError(Exception):
@@ -17,14 +17,6 @@ __root__ = __location__.parent # Set parent directory as root
 config = json.loads((__location__ / 'config.json').read_text(encoding='utf-8'))
 problem_dir = (__root__ / 'problems')
 
-def latex_escape(inp_str):
-    ret_str = inp_str.replace('\\', '\\textbackslash')
-    for chr in ('&', '%', '$', '#', '_', '{', '}'):
-        ret_str = ret_str.replace(chr, f"\{chr}")
-    return (ret_str
-        .replace('~', '\\textasciitilde')
-        .replace('^', '\\textasciicircum')
-        )
 
 if __name__ == '__main__':
     # Create arguments for command line

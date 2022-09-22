@@ -5,7 +5,7 @@ import re
 import argparse
 
 from pathlib import Path
-from util import descend_directory
+from util import descend_directory, latex_escape
 from create_problems import create_probs
 
 
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     docdepth = len(directory.split('/')) + 1
     contents = ((__root__ / 'templates' / f'{args.doctype}.tex')
         .read_text(encoding='utf-8')
-        .replace("TITLE", args.title)
+        .replace("TITLE", latex_escape(args.title))
         .replace("ROOTDIR", "/".join([".."] * docdepth))
         .replace("INCLUDES", '\n'.join([
             f"\input{{\\rootdir/includes/{name}.tex}}" \

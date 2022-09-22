@@ -2,9 +2,17 @@
 
 import json
 import argparse
-
 from pathlib import Path
+
+import yaml
+
 from util import compress_directories, create_directories
+
+
+__location__ = Path.cwd().joinpath(Path(__file__).parent).resolve()
+__root__ = __location__.parent # Set parent directory as root
+CONFIG = yaml.safe_load((__location__ / 'config.yaml')
+                        .read_text(encoding='utf-8'))
 
 def _dirstr_to_dict(dirstr):
     """convert a directory string, e.g. '12/1/1' into a dict of the form
@@ -17,7 +25,7 @@ def _dirstr_to_dict(dirstr):
         return {head_tail[0]: _dirstr_to_dict(head_tail[1])}
 
 def create_probs(source, item):
-    source_conf = config['problem_sources'][source]
+    source_conf = CONFIG['problem_sources'][source]
     comp_dirs = compress_directories(item)
     create_directories(comp_dirs, 
         parent_dir=(__root__ / "problems" / source))
@@ -33,13 +41,10 @@ def create_probs(source, item):
             if not path.exists():
                 path.write_text("(NOT WRITTEN)")
 
-__location__ = Path.cwd().joinpath(Path(__file__).parent).resolve()
-__root__ = __location__.parent # Set parent directory as root
-config = json.loads((__location__ / 'config.json').read_text(encoding='utf-8'))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument('source', choices=config['problem_sources'].keys(),
+    parser.add_argument('source', choices=CONFIG['problem_sources'].keys(),
         help="the problem source to add problems for")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument('-p', '--problem', help="a single problem path in the source")
