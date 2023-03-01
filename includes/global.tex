@@ -1,20 +1,29 @@
 % This file should be included in all documents. Set packages
-% such as fonts that should be more or less consistent throughout 
+% that should be more or less consistent throughout 
 % the course, and define custom commands for specific math 
 % conventions so they are consistent throughout, e.g. the notation
 % for a vector should be consistent throughout all of a Calc III
-% course's documents, so you might include
+% course's documents, so you might include one of the following:
+%
 % \newcommand{\vect}[1]{\vec{#1}}
-% If you decide in a future semester on a different notation, then
-% changing this one command will update all documents for the whole
+% \newcommand{\vect}[1]{\mathbf{#1}}
+% \newcommand{\vect}[1]{\overrightarrow{#1}}
+%
+% That way, if you decide in a future semester on a different notation,
+% then changing this one command will update all documents for the whole
 % course.
 
 % EXAMPLES
 % \usepackage{mathtools}
 % \usepackage{xcolor}
+% \usepackage{booktabs}
+% \usepackage{multirow}
+% \usepackage{siunitx}
 
-% \usepackage{mlmodern}
-% \usepackage[T1]{fontenc}
-% \usepackage{microtype}
-
-% \usepackage{zmacros} % Custom macros in a texmf folder
+% You can also include custom macros in a local texmf folder:
+% \usepackage{zmacros} 
+% If doing so, I recommend version controlling this folder and using 
+% a remote git repository to make sure it's consistent across all 
+% machines you may be using for your course documents. You can also 
+% include it as a subrepository, but I think that's probably more of a 
+% hassle than it's worth. 

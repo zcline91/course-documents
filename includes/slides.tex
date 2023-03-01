@@ -1,4 +1,14 @@
+% Use this file to set up the styles and packages that should be imported
+% in all beamer slide type documents. For instance, you could import your
+% own custom package with a theme for your institution:
+
 \usepackage{bubeamertheme}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% The following is a trick to get the `course-info.tex' import to work
+% with the theme above and add the info to the first slide of the file.
+
 \usepackage{etoolbox}
 
 \makeatletter
@@ -19,3 +29,5 @@
 \makeatother
 
 \AtBeginDocument{\begin{frame}\titlepage\end{frame}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

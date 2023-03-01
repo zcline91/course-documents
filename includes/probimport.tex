@@ -11,13 +11,17 @@
 % be a nested subdirectory
 \newcommand{\pimport}[2]{\subimport{\rootdir/problems/#1}{#2}}
 
-% modified \question command
+% -- modified \question command --
+% There is one required argument (the path as in \pimport) and one optional
+% argument (the point value of the question).
 \newcommand{\pquestion}[2][]{%
   \ifblank{#1}{\question}{\question[#1]}%
   \pimport{#2}{statement}%
 }
 
-% modified \question command with a solutionbox
+% -- modified \question command with a solutionbox --
+% This is the same as \question but with a second required argument of the 
+% height of the space reserved for the solution.
 \newcommand{\pquestionsol}[3][]{%
   \pquestion[#1]{#2}%
   \begin{solutionbox}{#3}%
@@ -25,13 +29,17 @@
   \end{solutionbox}%
 }
 
-% modified \part command
+% -- modified \part command --
+% Similar to the \pquestion command with same arguments, but should be in a 
+% \parts environment instead of a \questions environment.
 \newcommand{\ppart}[2][]{%
   \ifblank{#1}{\part}{\part[#1]}%
   \pimport{#2}{statement}%
 }
 
-% modified \part command with a solutionbox
+% -- modified \part command with a solutionbox --
+% Similar to the \pquestionsol command with same arguments, but should be in a
+% \parts environment instead of a \questions environment.
 \newcommand{\ppartsol}[3][]{%
   \ppart[#1]{#2}%
   \begin{solutionbox}{#3}%
@@ -39,13 +47,16 @@
   \end{solutionbox}%
 }
 
-% modified \subpart command
+% -- modified \subpart command --
+% Similar to \pquestion and \ppart, but should be in \subparts environment.
 \newcommand{\psubpart}[2][]{%
   \ifblank{#1}{\subpart}{\subpart[#1]}%
   \pimport{#2}{statement}%
 }
 
-% modified \subpart command with a solutionbox
+% -- modified \subpart command with a solutionbox --
+% Similar to \pquestionsol and \ppartsol, but should be in \subparts
+% environment.
 \newcommand{\psubpartsol}[3][]{%
   \psubpart[#1]{#2}%
   \begin{solutionbox}{#3}%
@@ -53,7 +64,10 @@
   \end{solutionbox}%
 }
 
-% modified \item command
+% -- modified \item command --
+% Imports the contents of problems/#2/#3.tex into an \item, where #2 and 
+% #3 are the two required arguments. #1 is an optional argument for the 
+% label of the \item.
 \newcommand{\pitem}[3][]{%
   \ifblank{#1}{\item}{\item[#1]}%
   \pimport{#2}{#3}%
