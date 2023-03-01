@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 
@@ -79,3 +80,7 @@ def latex_escape(inp_str):
         .replace('~', '\\textasciitilde ')
         .replace('^', '\\textasciicircum ')
         )
+
+def safestr(x):
+    """Return a safe string suitable for use in file/directory names"""
+    return re.sub("[^0-9a-zA-z._-]+", "-", x).lower()

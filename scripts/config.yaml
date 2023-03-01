@@ -24,7 +24,7 @@ document_types:
     - paper
     - course-info
     - probimport
-    extra-versions:
+    extra_versions:
       solutions:
         options: answers
         class: quiz
@@ -44,7 +44,7 @@ document_types:
     - paper
     - course-info
     - probimport
-    extra-versions:
+    extra_versions:
       solutions:
         options: answers
         class: worksheet
@@ -56,7 +56,7 @@ document_types:
     - paper
     - course-info
     - probimport
-    extra-versions:
+    extra_versions:
       solutions:
         options: answers
         class: test
@@ -68,7 +68,7 @@ document_types:
     - global
     - course-info
   clicker-questions:
-    default_directory: 'clicker-questions/%(title)s   '
+    default_directory: clicker-questions/%(title)s
     default_filename: "%(title)s.tex"
     includes:
     - slides
