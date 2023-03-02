@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
-import json
 import argparse
-
 from pathlib import Path
+
+import yaml
 
 from util import path_to_dict, descend_directory, latex_escape
 
@@ -14,8 +14,9 @@ class ProblemLevelError(Exception):
 
 __location__ = Path.cwd().joinpath(Path(__file__).parent).resolve()
 __root__ = __location__.parent # Set parent directory as root
-config = json.loads((__location__ / 'config.json').read_text(encoding='utf-8'))
-problem_dir = (__root__ / 'problems')
+CONFIG = yaml.safe_load((__location__ / 'config.yaml')
+                        .read_text(encoding='utf-8'))
+PROBLEM_DIR = (__root__ / 'problems')
 
 
 if __name__ == '__main__':
@@ -31,16 +32,16 @@ if __name__ == '__main__':
 
 
     # Create the problem contents portion of the file
-    prob_dicts = path_to_dict(problem_dir)
+    prob_dicts = path_to_dict(PROBLEM_DIR)
     prob_contents = ""
     for source, prob_dict in prob_dicts.items():
-        prob_depth = config["problem_sources"][source]['directory_levels']
+        prob_depth = CONFIG["problem_sources"][source]['directory_levels']
         prob_contents += f"\\section{{{latex_escape(source)}}}"
         depth = 0
         printing_files = False
         for prob in descend_directory(prob_dict):
             parts = len(prob.parts)
-            if (problem_dir / source / prob).is_dir() and prob.stem != 'img':
+            if (PROBLEM_DIR / source / prob).is_dir() and prob.stem != 'img':
                 if printing_files:
                     prob_contents += "  " * depth + "\\end{description}\n"
                     printing_files = False
