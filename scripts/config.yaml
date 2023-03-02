@@ -1,10 +1,18 @@
 ---
+# Each problem_source should have an entirely alphabetic name and 
+# should specify the standard tex files to create for problems from
+# that source, as well as what level in the directory structure should
+# considered the 'problem' level.
 problem_sources:
   textbook:
     standard_tex_files:
     - statement
     - solution
     directory_levels: 3
+# Each document_type should specify, at a minimum, the default
+# directory (relative to the documents folder) and filename for 
+# documents of that type, as well as a list of includes (matching
+# filenames in the includes folder)
 document_types:
   hw-solutions:
     default_directory: homework/%(title)s
